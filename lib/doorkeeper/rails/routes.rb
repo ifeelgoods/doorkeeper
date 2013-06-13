@@ -51,15 +51,15 @@ module Doorkeeper
       end
 
       def authorization_routes(mapping)
-          routes.resource(
-            :authorization, :path => 'authorize',
-            :only => [:create, :update, :destroy],
-            :as => mapping[:as],
-            :controller => mapping[:controllers]
-          ) do
-            routes.get '/:code', :action => :show, :on => :member
-            routes.get '/', :action => :new, :on => :member
-          end
+        routes.resource(
+          :authorization, :path => 'authorize',
+          :only => [:create, :update, :destroy],
+          :as => mapping[:as],
+          :controller => mapping[:controllers]
+        ) do
+          routes.get '/:code', :action => :show, :on => :member
+          routes.get '/', :action => :new, :on => :member
+        end
       end
 
       def token_routes(mapping)
@@ -67,7 +67,10 @@ module Doorkeeper
           :token, :path => 'token',
           :only => [:create], :as => mapping[:as],
           :controller => mapping[:controllers]
-        )
+        ) do
+          routes.match 'revoke', :via => :post, :action => :destroy, :as => mapping[:as]
+          routes.match 'revoke', :via => :options, :action => :options, :as => mapping[:as]
+        end
       end
 
       def token_info_routes(mapping)
