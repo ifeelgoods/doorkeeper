@@ -63,6 +63,8 @@ module Doorkeeper
       def token_info_routes(mapping)
         routes.scope :controller => mapping[:controllers] do
           routes.match 'token/info', :via => :get, :action => :show, :as => mapping[:as]
+          routes.match 'revoke', :via => :post, :action => :destroy, :as => mapping[:as]
+          routes.match 'revoke', :via => :options, :action => :options, :as => mapping[:as]
         end
       end
 
