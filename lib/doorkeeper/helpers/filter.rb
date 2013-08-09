@@ -27,7 +27,7 @@ module Doorkeeper
 
       def doorkeeper_token
         methods = Doorkeeper.configuration.access_token_methods
-        @token ||= OAuth::Token.authenticate request, *methods
+        @token = OAuth::Token.authenticate request, *methods
       end
 
       def doorkeeper_unauthorized_render_options
