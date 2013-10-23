@@ -9,6 +9,10 @@ module Doorkeeper
         current_resource_owner
       end
 
+      def original_resource_owner
+        instance_eval &Doorkeeper.configuration.original_resource_owner
+      end
+
       def current_resource_owner
         instance_eval(&Doorkeeper.configuration.authenticate_resource_owner)
       end

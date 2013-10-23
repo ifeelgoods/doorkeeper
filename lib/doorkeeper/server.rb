@@ -33,6 +33,10 @@ module Doorkeeper
       context.send :current_resource_owner
     end
 
+    def original_resource_owner
+      context.send :original_resource_owner
+    end
+
     def current_refresh_token
       AccessToken.by_refresh_token(parameters[:refresh_token])
     end
