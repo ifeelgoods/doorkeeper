@@ -148,6 +148,12 @@ module Doorkeeper
              warn(I18n.translate('doorkeeper.errors.messages.credential_flow_not_configured'))
              nil
            }
+    option :original_resource_owner,
+           :as => :original_resource_owner,
+           :default => lambda{|routes|
+              warn(I18n.translate('doorkeeper.errors.messages.original_resource_owner_not_configured'))
+              nil
+            }
     option :logout_url,
            :as => :logout_url,
            :default => nil
