@@ -5,6 +5,7 @@
 - enhancements
   - Add possiblity to validate and configure CORS on revoke route for ajax requests
   - Add possibility to use logout_url result on revoke
+  - Add basic for oauth_application directly link to an account
 - customizations
   - Remove the possibility to delete an app from the index
 
