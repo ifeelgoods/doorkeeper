@@ -163,6 +163,12 @@ module Doorkeeper
     option :cors_options,
            :as => :cors_options,
            :default => nil
+    option :original_resource_owner,
+           :as => :original_resource_owner,
+           :default => lambda{|routes|
+              warn(I18n.translate('doorkeeper.errors.messages.original_resource_owner_not_configured'))
+              nil
+            }
     option :logout_url,
            :as => :logout_url,
            :default => nil
@@ -175,7 +181,7 @@ module Doorkeeper
     option :realm,                         default: 'Doorkeeper'
     option :wildcard_redirect_uri,         default: false
     option :grant_flows,
-           default: %w(authorization_code implicit password client_credentials)
+           default: %w(authorization_code implicit password client_credentials account_application)
 
     def refresh_token_enabled?
       !!@refresh_token_enabled
