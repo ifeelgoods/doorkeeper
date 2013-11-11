@@ -68,8 +68,7 @@ module Doorkeeper
           :only => [:create], :as => mapping[:as],
           :controller => mapping[:controllers]
         ) do
-          routes.match 'revoke', :via => :post, :action => :destroy, :as => mapping[:as]
-          routes.match 'revoke', :via => :options, :action => :options, :as => mapping[:as]
+          routes.match 'revoke', :via => [:post, :options],  :action => :destroy, :as => mapping[:as]
         end
       end
 
