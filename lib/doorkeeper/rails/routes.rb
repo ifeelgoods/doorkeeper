@@ -40,6 +40,7 @@ module Doorkeeper
           map_route(:applications, :application_routes)
           map_route(:authorized_applications, :authorized_applications_routes)
           map_route(:token_info, :token_info_routes)
+          map_route(:tokens, :revoke_routes)
         end
       end
 
@@ -67,9 +68,11 @@ module Doorkeeper
           :token, :path => 'token',
           :only => [:create], :as => mapping[:as],
           :controller => mapping[:controllers]
-        ) do
-          routes.match 'revoke', :via => [:post, :options],  :action => :destroy, :as => mapping[:as]
-        end
+        )
+      end
+
+      def revoke_routes(mapping)
+          routes.match 'revoke', :via => [:post, :options], :controller => mapping[:controllers],  :action => :destroy, :as => mapping[:as]
       end
 
       def token_info_routes(mapping)
