@@ -40,7 +40,7 @@ module Doorkeeper
           map_route(:applications, :application_routes)
           map_route(:authorized_applications, :authorized_applications_routes)
           map_route(:token_info, :token_info_routes)
-          map_route(:tokens, :revoke_routes)
+          map_route(:token_info, :revoke_routes)
         end
       end
 
