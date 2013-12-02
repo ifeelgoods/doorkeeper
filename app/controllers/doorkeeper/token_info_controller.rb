@@ -1,6 +1,5 @@
 module Doorkeeper
   class TokenInfoController < ::Doorkeeper::ApplicationController
-    before_filter :validate_cors, :only => [:destroy, :options]
 
     def show
       if doorkeeper_token && doorkeeper_token.accessible?
@@ -47,10 +46,6 @@ module Doorkeeper
       end
     end
 
-    def options
-      render :nothing => true
-    end
-
     private
 
     def revoke_refresh_token(token)
@@ -85,14 +80,6 @@ module Doorkeeper
     def logout_url
       if params[:logout_url] && params[:logout_url] == 'true' && Doorkeeper.configuration.logout_url
         instance_eval &Doorkeeper.configuration.logout_url
-      else
-        nil
-      end
-    end
-
-    def validate_cors
-      if Doorkeeper.configuration.cors_options
-        instance_eval &Doorkeeper.configuration.cors_options
       else
         nil
       end
