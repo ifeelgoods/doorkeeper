@@ -160,6 +160,9 @@ module Doorkeeper
     option :cors_options,
            :as => :cors_options,
            :default => nil
+    option :xframe_options,
+           :as => :xframe_options,
+           :default => nil
     option :skip_authorization, :default => lambda{|routes|}
     option :access_token_expires_in,      :default => 7200
     option :authorization_code_expires_in,:default => 600
