@@ -163,6 +163,9 @@ module Doorkeeper
     option :cors_options,
            :as => :cors_options,
            :default => nil
+    option :xframe_options,
+           :as => :xframe_options,
+           :default => nil
     option :original_resource_owner,
            :as => :original_resource_owner,
            :default => lambda{|routes|
