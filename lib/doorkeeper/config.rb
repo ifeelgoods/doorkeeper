@@ -177,6 +177,9 @@ doorkeeper.
              warn(I18n.translate('doorkeeper.errors.messages.credential_flow_not_configured'))
              nil
            end)
+    option :xframe_options,
+           :as => :xframe_options,
+           :default => nil
     option :original_resource_owner,
            :as => :original_resource_owner,
            :default => lambda{|routes|

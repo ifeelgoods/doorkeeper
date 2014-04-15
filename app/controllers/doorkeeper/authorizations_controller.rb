@@ -1,6 +1,8 @@
 module Doorkeeper
   class AuthorizationsController < Doorkeeper::ApplicationController
+<<<<<<< HEAD
     before_action :authenticate_resource_owner!
+    after_filter :validate_xframe
 
     def new
       if pre_auth.authorizable?
@@ -52,6 +54,14 @@ module Doorkeeper
 
     def strategy
       @strategy ||= server.authorization_request pre_auth.response_type
+    end
+
+    def validate_xframe
+      if Doorkeeper.configuration.xframe_options
+        instance_eval &Doorkeeper.configuration.xframe_options
+      else
+        nil
+      end
     end
   end
 end
