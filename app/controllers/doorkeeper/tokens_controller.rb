@@ -20,11 +20,10 @@ module Doorkeeper
       if authorized?
         revoke_token
       end
-
-      # The authorization server responds with HTTP status code 200 if the token
-      # has been revoked successfully or if the client submitted an invalid
-      # token
-      render json: {}, status: 200
+      # The authorization server responds with HTTP status code 200 if the
+      # token has been revoked successfully or if the client submitted an invalid token
+      result = logout_url ? {:logout_url => logout_url} : {}
+      render json: result, status: 200
     end
 
     private
@@ -68,6 +67,14 @@ module Doorkeeper
     def token
       @token ||= AccessToken.by_token(request.POST['token']) ||
         AccessToken.by_refresh_token(request.POST['token'])
+    end
+
+    def logout_url
+      if params[:logout_url] && params[:logout_url] == 'true' && Doorkeeper.configuration.logout_url
+        instance_eval &Doorkeeper.configuration.logout_url
+      else
+        nil
+      end
     end
 
     def strategy
