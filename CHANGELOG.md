@@ -4,6 +4,7 @@
 
 - enhancements
   - Add possiblity to validate and configure CORS on revoke route for ajax requests
+  - Add possibility to use logout_url result on revoke
 
 ## master
 
