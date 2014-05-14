@@ -76,6 +76,7 @@ module Doorkeeper
 
       def revoke_routes(mapping)
         routes.post 'revoke', controller: mapping[:controllers], action: :revoke
+        routes.match 'revoke', controller: mapping[:controllers], :via => :options, :action => :options
       end
 
       def token_info_routes(mapping)

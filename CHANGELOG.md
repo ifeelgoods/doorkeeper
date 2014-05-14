@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0+ifg1
+
+- enhancements
+  - Add possiblity to validate and configure CORS on revoke route for ajax requests
+
 ## 1.2.0
 
 - enhancements
