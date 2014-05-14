@@ -74,16 +74,6 @@ feature 'Remove application' do
     @app = FactoryGirl.create :application
   end
 
-  scenario 'deleting an application from list' do
-    visit '/oauth/applications'
-    i_should_see @app.name
-    within(:css, "tr#application_#{@app.id}") do
-      click_button 'Destroy'
-    end
-    i_should_see 'Application deleted'
-    i_should_not_see @app.name
-  end
-
   scenario 'deleting an application from show' do
     visit "/oauth/applications/#{@app.id}"
     click_button 'Destroy'
