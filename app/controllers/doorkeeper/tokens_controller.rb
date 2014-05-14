@@ -3,6 +3,7 @@ module Doorkeeper
     include Helpers::Controller
     include ActionController::RackDelegation
     include ActionController::Instrumentation
+    before_filter :validate_cors, :only => [:revoke, :options]
 
     def create
       response = strategy.authorize
@@ -30,6 +31,10 @@ module Doorkeeper
       render json: {}, status: 200
     end
 
+    def options
+       render :nothing => true
+    end
+
     private
 
     def revoke_token(token)
@@ -39,6 +44,14 @@ module Doorkeeper
         true
       else
         false
+      end
+    end
+
+    def validate_cors
+      if Doorkeeper.configuration.cors_options
+        instance_eval &Doorkeeper.configuration.cors_options
+      else
+        nil
       end
     end
 

@@ -21,6 +21,10 @@ describe 'Default routes' do
     post('/oauth/revoke').should route_to('doorkeeper/tokens#revoke')
   end
 
+  it 'OPTIONS /oauth/revoke routes to tokens controller' do
+    options('/oauth/revoke').should route_to('doorkeeper/tokens#options')
+  end
+
   it 'GET /oauth/applications routes to applications controller' do
     expect(get('/oauth/applications')).to route_to('doorkeeper/applications#index')
   end

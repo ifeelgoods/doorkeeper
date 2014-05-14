@@ -45,6 +45,10 @@ describe 'Custom controller for routes' do
     post('/space/oauth/revoke').should route_to('custom_authorizations#revoke')
   end
 
+  it 'OPTIONS /space/oauth/revoke routes to tokens controller' do
+    options('/space/oauth/revoke').should route_to('custom_authorizations#options')
+  end
+
   it 'GET /space/oauth/applications routes to applications controller' do
     expect(get('/space/oauth/applications')).to route_to('custom_authorizations#index')
   end
