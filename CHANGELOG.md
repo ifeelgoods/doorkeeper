@@ -5,6 +5,8 @@
 - enhancements
   - Add possiblity to validate and configure CORS on revoke route for ajax requests
   - Add possibility to use logout_url result on revoke
+- customizations
+  - Remove the possibility to delete an app from the index
 
 ## 1.3.1
 
