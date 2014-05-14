@@ -1,5 +1,6 @@
 module Doorkeeper
   class TokensController < Doorkeeper::ApplicationMetalController
+
     def create
       response = authorize_response
       self.headers.merge! response.headers
@@ -11,6 +12,8 @@ module Doorkeeper
 
     # OAuth 2.0 Token Revocation - http://tools.ietf.org/html/rfc7009
     def revoke
+      validate_cors
+
       # The authorization server first validates the client credentials
       if doorkeeper_token && doorkeeper_token.accessible?
         # Doorkeeper does not use the token_type_hint logic described in the RFC 7009
@@ -22,6 +25,12 @@ module Doorkeeper
       render json: {}, status: 200
     end
 
+    def options
+      validate_cors
+
+      render :nothing => true
+    end
+
     private
 
     def revoke_token(token)
@@ -31,6 +40,14 @@ module Doorkeeper
         true
       else
         false
+      end
+    end
+
+    def validate_cors
+      if Doorkeeper.configuration.cors_options
+        instance_eval &Doorkeeper.configuration.cors_options
+      else
+        nil
       end
     end
 

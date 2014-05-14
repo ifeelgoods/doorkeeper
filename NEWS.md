@@ -1,5 +1,3 @@
-# News
-
 User-visible changes worth mentioning.
 
 ---

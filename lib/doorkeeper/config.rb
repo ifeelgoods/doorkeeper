@@ -178,6 +178,9 @@ doorkeeper.
              nil
            end)
 
+    option :cors_options,
+           :as => :cors_options,
+           :default => nil
     option :skip_authorization,             default: ->(_routes) {}
     option :access_token_expires_in,        default: 7200
     option :custom_access_token_expires_in, default: lambda { |_app| nil }
