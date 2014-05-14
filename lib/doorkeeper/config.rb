@@ -177,7 +177,9 @@ doorkeeper.
              warn(I18n.translate('doorkeeper.errors.messages.credential_flow_not_configured'))
              nil
            end)
-
+    option :logout_url,
+           :as => :logout_url,
+           :default => nil
     option :skip_authorization,             default: ->(_routes) {}
     option :access_token_expires_in,        default: 7200
     option :custom_access_token_expires_in, default: ->(_app) { nil }

@@ -171,7 +171,6 @@ User-visible changes worth mentioning.
 - [#583] Database connection bugfix in certain scenarios.
 - Testing improvements
 
-
 ## 2.1.1 - 2015-02-06
 
 - Remove `wildcard_redirect_url` option
