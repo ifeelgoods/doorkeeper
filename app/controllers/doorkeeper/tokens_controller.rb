@@ -28,7 +28,8 @@ module Doorkeeper
       end
       # The authorization server responds with HTTP status code 200 if the
       # token has been revoked sucessfully or if the client submitted an invalid token
-      render json: {}, status: 200
+      result = logout_url ? {:logout_url => logout_url} : {}
+      render json: result, status: 200
     end
 
     def options
@@ -50,6 +51,14 @@ module Doorkeeper
     def validate_cors
       if Doorkeeper.configuration.cors_options
         instance_eval &Doorkeeper.configuration.cors_options
+      else
+        nil
+      end
+    end
+
+    def logout_url
+      if params[:logout_url] && params[:logout_url] == 'true' && Doorkeeper.configuration.logout_url
+        instance_eval &Doorkeeper.configuration.logout_url
       else
         nil
       end
