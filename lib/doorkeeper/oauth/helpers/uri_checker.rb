@@ -12,7 +12,7 @@ module Doorkeeper
         def self.matches?(url, client_url)
           if Doorkeeper.configuration.wildcard_redirect_uri
             url = as_uri(url)
-            return true if url.to_s =~ /^#{Regexp.escape(client_url.to_s)}/
+            return true if url.to_s =~ /^#{Regexp.escape(client_url.to_s).gsub('\*', '.*')}$/
             false
           else
             url, client_url = as_uri(url), as_uri(client_url)
