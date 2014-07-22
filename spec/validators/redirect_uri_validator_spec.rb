@@ -75,4 +75,15 @@ describe RedirectUriValidator do
       expect(error).to eq('must be an HTTPS/SSL URI.')
     end
   end
+
+  context 'with wildcard_redirect_uri = true' do
+    before do
+      Doorkeeper.configuration.stub(wildcard_redirect_uri: true)
+    end
+
+    it 'is valid if the domain contains *' do
+      subject.redirect_uri = 'http://*.example.com/callback'
+      expect(subject).to be_valid
+    end
+  end
 end
