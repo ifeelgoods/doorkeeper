@@ -10,7 +10,8 @@ class RedirectUriValidator < ActiveModel::EachValidator
       record.errors.add(attribute, :blank)
     else
       value.split.each do |val|
-        # To make the test pass, replace the * with 'a'
+        # URI.parse won't allow stars in a URL,
+        # so we need to replace them by any character for that check to pass.
         val = val.gsub('*', 'a') if Doorkeeper.configuration.wildcard_redirect_uri
         uri = ::URI.parse(val)
         return if native_redirect_uri?(uri)
