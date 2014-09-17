@@ -26,11 +26,11 @@ module Doorkeeper
                       if: :use_refresh_token?
 
     def self.authenticate(token)
-      where(token: token).first
+      where(token: token).limit(1).to_a.first
     end
 
     def self.by_refresh_token(refresh_token)
-      where(refresh_token: refresh_token).first
+      where(refresh_token: refresh_token).limit(1).to_a.first
     end
 
     def self.revoke_all_for(application_id, resource_owner)
