@@ -17,8 +17,7 @@ module Doorkeeper::OAuth
     def authorize
       validate
       @response = if valid?
-        find_or_create_access_token
-        TokenResponse.new access_token
+        TokenResponse.new create_access_token
       else
         ErrorResponse.from_request self
       end
@@ -28,25 +27,7 @@ module Doorkeeper::OAuth
       self.error.nil?
     end
 
-    def access_token
-      return unless client.present? && original_resource_owner.present?
-      @access_token ||= Doorkeeper::AccessToken.matching_token_for client, original_resource_owner.id, nil
-    end
-
   private
-
-    def find_or_create_access_token
-      if access_token
-        access_token.expired? ? revoke_and_create_access_token : access_token
-      else
-        create_access_token
-      end
-    end
-
-    def revoke_and_create_access_token
-      access_token.revoke
-      create_access_token
-    end
 
     def create_access_token
       @access_token = Doorkeeper::AccessToken.create!({
