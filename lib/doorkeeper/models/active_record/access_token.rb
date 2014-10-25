@@ -16,7 +16,6 @@ module Doorkeeper
       where(application_id: application_id,
             resource_owner_id: resource_owner_id,
             revoked_at: nil).
-        order('created_at desc').
         limit(1).to_a.first
     end
     private_class_method :last_authorized_token_for
