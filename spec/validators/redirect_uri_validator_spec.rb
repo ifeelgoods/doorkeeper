@@ -78,11 +78,11 @@ describe RedirectUriValidator do
 
   context 'with wildcard_redirect_uri = true' do
     before do
-      Doorkeeper.configuration.stub(wildcard_redirect_uri: true)
+      allow(Doorkeeper.configuration).to receive(:wildcard_redirect_uri){true}
     end
 
     it 'is valid if the domain contains *' do
-      subject.redirect_uri = 'http://*.example.com/callback'
+      subject.redirect_uri = 'https://*.example.com/callback'
       expect(subject).to be_valid
     end
   end
