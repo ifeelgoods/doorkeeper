@@ -208,7 +208,7 @@ and that your `initialize_models!` method doesn't raise any errors.\n
     option :realm,                         default: 'Doorkeeper'
     option :wildcard_redirect_uri,         default: false
     option :force_ssl_in_redirect_uri,     default: !Rails.env.development?
-    option :grant_flows,                   default: %w(authorization_code client_credentials account_application)
+    option :grant_flows,                   default: %w(authorization_code client_credentials)
 
     attr_reader :reuse_access_token
 
@@ -264,7 +264,7 @@ and that your `initialize_models!` method doesn't raise any errors.\n
     def calculate_authorization_response_types
       types = []
       types << 'code'  if grant_flows.include? 'authorization_code'
-      types << 'token' if grant_flows.include? 'implicit'
+      types << 'token' if (grant_flows.include?('implicit') || grant_flows.include?('account_application'))
       types
     end
 
