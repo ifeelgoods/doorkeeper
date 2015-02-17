@@ -260,7 +260,7 @@ doorkeeper.
     def calculate_authorization_response_types
       types = []
       types << 'code'  if grant_flows.include? 'authorization_code'
-      types << 'token' if grant_flows.include? 'implicit'
+      types << 'token' if (grant_flows.include?('implicit') || grant_flows.include?('account_application'))
       types
     end
 
