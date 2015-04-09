@@ -1,6 +1,5 @@
 module Doorkeeper
   class AuthorizationsController < Doorkeeper::ApplicationController
-<<<<<<< HEAD
     before_action :authenticate_resource_owner!
     after_filter :validate_xframe
 
