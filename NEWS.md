@@ -1,6 +1,14 @@
 User-visible changes worth mentioning.
 
 ---
+## 2.2.2+ifg.1
+
+- Re add wildcard feature (possible security issues)
+- Add possiblity to validate and configure CORS on revoke route for ajax requests
+- Add possibility to use logout_url result on revoke
+- Add basic for oauth_application directly link to an account
+- Add xframe options for oauth/authorize
+- Remove the possibility to delete an app from the index
 
 ## 2.2.2
 
