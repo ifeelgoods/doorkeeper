@@ -1,3 +1,5 @@
+require 'fuzzyurl'
+
 module Doorkeeper
   module OAuth
     module Helpers
@@ -10,10 +12,15 @@ module Doorkeeper
         end
 
         def self.matches?(url, client_url)
-          url = as_uri(url)
-          client_url = as_uri(client_url)
-          url.query = nil
-          url == client_url
+          if Doorkeeper.configuration.wildcard_redirect_uri
+            url = as_uri(url)
+            fuzzy_client_url = FuzzyURL.new(client_url.to_s)
+            return fuzzy_client_url.matches?(url.to_s)
+          else
+            url, client_url = as_uri(url), as_uri(client_url)
+            url.query = nil
+            url == client_url
+          end
         end
 
         def self.valid_for_authorization?(url, client_url)
