@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "railties", ">= 4.2"
-  s.add_dependency "fuzzyurl", "~> 0.2.2"
+  s.add_dependency "fuzzyurl", "~> 0.9.0"
 
   s.add_development_dependency "capybara"
   s.add_development_dependency "database_cleaner", "~> 1.3.0"
