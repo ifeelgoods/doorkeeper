@@ -13,9 +13,8 @@ module Doorkeeper
 
         def self.matches?(url, client_url)
           if Doorkeeper.configuration.wildcard_redirect_uri
-            url = as_uri(url)
-            fuzzy_client_url = FuzzyURL.new(client_url.to_s)
-            return fuzzy_client_url.matches?(url.to_s)
+            mask = Fuzzyurl.mask(client_url.to_s)
+            Fuzzyurl.matches?(mask, url.to_s)
           else
             url, client_url = as_uri(url), as_uri(client_url)
             url.query = nil
